@@ -17,8 +17,6 @@
 /**
  * External dependencies
  */
-jest.mock('flagged');
-import { useFeature } from 'flagged';
 import { renderToStaticMarkup } from '@web-stories-wp/react';
 import PropTypes from 'prop-types';
 import { StoryAnimation } from '@web-stories-wp/animation';
@@ -99,16 +97,6 @@ const TEXT_WITH_ROTATION = {
 };
 
 describe('Text Element output', () => {
-  beforeAll(() => {
-    useFeature.mockImplementation((feature) => {
-      const config = {
-        enableAnimation: false,
-      };
-
-      return config[feature];
-    });
-  });
-
   it('should render text with color', () => {
     const element = renderToStaticMarkup(
       <WrapAnimation>

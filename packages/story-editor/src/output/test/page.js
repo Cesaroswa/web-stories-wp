@@ -19,7 +19,6 @@
  */
 import { renderToStaticMarkup } from '@web-stories-wp/react';
 import { render } from '@testing-library/react';
-import { useFeature } from 'flagged';
 import { PAGE_WIDTH, PAGE_HEIGHT } from '@web-stories-wp/units';
 
 /**
@@ -34,21 +33,9 @@ import {
 } from '../../testUtils';
 import { MaskTypes } from '../../masks/constants';
 
-jest.mock('flagged');
-
 /* eslint-disable testing-library/no-node-access, testing-library/no-container */
 
 describe('Page output', () => {
-  beforeAll(() => {
-    useFeature.mockImplementation((feature) => {
-      const config = {
-        enableAnimation: true,
-      };
-
-      return config[feature];
-    });
-  });
-
   describe('aspect-ratio markup', () => {
     let backgroundElement;
 

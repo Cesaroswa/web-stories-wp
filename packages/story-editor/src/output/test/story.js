@@ -17,8 +17,6 @@
 /**
  * External dependencies
  */
-jest.mock('flagged');
-import { useFeature } from 'flagged';
 import { renderToStaticMarkup } from '@web-stories-wp/react';
 
 /**
@@ -27,16 +25,6 @@ import { renderToStaticMarkup } from '@web-stories-wp/react';
 import StoryOutput from '../story';
 
 describe('Story output', () => {
-  beforeAll(() => {
-    useFeature.mockImplementation((feature) => {
-      const config = {
-        enableAnimation: true,
-      };
-
-      return config[feature];
-    });
-  });
-
   it('should include Google Fonts stylesheet', () => {
     const props = {
       id: '123',
