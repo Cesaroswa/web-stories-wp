@@ -101,7 +101,10 @@ function VideoDisplay({ previewMode, box: { width, height }, element }) {
           data-leaf-element="true"
         >
           {resource.output.src && (
-            <source src={resource.output.src} type={resource.output.mimeType} />
+            <source
+              src={`${resource.output.src}#t=0.001`}
+              type={resource.output.mimeType}
+            />
           )}
         </Video>
       )}

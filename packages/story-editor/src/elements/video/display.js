@@ -119,7 +119,7 @@ function VideoDisplay({ previewMode, box: { width, height }, element }) {
           data-testid="videoElement"
           data-leaf-element="true"
         >
-          {url && <source src={url} type={resource.mimeType} />}
+          {url && <source src={`${url}#t=0.001`} type={resource.mimeType} />}
           {tracks &&
             tracks.map(({ srclang, label, track: src, id: key }, i) => (
               <track
