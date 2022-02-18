@@ -19,6 +19,7 @@
  */
 import { preloadImage } from '@googleforcreators/media';
 import { getTimeTracker, trackError } from '@googleforcreators/tracking';
+// const url = new URL('./generateBlurhash.worker.js', import.meta.url);
 
 const getImageData = (image) => {
   const { width, height } = image;
@@ -43,10 +44,16 @@ const getBlurHashFromImage = async (src) => {
 
   const trackTiming = getTimeTracker('load_get_blurhash');
   return new Promise((resolve, reject) => {
-    const url = new URL('@googleforcreators/workers', import.meta.url);
-    console.log('url', url);
-    const worker = new Worker(url);
+    let worker;
+    try {
+      const url = new URL('@googleforcreators/workers', import.meta.url);
+      console.log(url);
+      worker = new Worker(url, { type: 'module' });
+    } catch (error) {
+      console.log(error);
+    }
 
+    console.log('sending a message');
     worker.postMessage({
       image: data,
       width,
@@ -55,6 +62,7 @@ const getBlurHashFromImage = async (src) => {
       componentY: 4,
     });
     worker.addEventListener('message', function (event) {
+      console.log('messaging');
       worker.terminate(); // lgtm [js/property-access-on-non-object]
       trackTiming();
       if (event.data.type === 'success') {

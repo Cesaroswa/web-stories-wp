@@ -260,6 +260,15 @@ const editorAndDashboard = {
     [EDITOR_CHUNK]: './packages/wp-story-editor/src/index.js',
     [DASHBOARD_CHUNK]: './packages/wp-dashboard/src/index.js',
   },
+  module: {
+    rules: [
+      ...sharedConfig.module.rules,
+      {
+        test: /\.worker\.js/,
+        type: 'asset/inline',
+      },
+    ],
+  },
   plugins: [
     ...sharedConfig.plugins.filter(
       (plugin) => !(plugin instanceof DependencyExtractionWebpackPlugin)
@@ -302,18 +311,9 @@ const blurhashWorker = {
     mainFields: ['browser', 'module', 'main'],
   },
   entry: {
-    'worker-scripts': './packages/workers/src/index.js',
+    'generateBlurhash.worker': './packages/workers/src/index.js',
   },
   target: 'webworker',
-  module: {
-    rules: [
-      ...sharedConfig.module.rules,
-      // {
-      //   test: /\.worker\.js/,
-      //   type: 'asset/inline',
-      // },
-    ].filter(Boolean),
-  },
   plugins: [
     ...sharedConfig.plugins,
     new WebpackBar({
