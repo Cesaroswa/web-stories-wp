@@ -20,6 +20,7 @@ import { encode } from 'blurhash';
 
 const callback = function (event) {
   const { image, width, height, componentX, componentY } = event.data;
+  console.log('✨✨✨ SCRIPT RUNNING BABY');
 
   try {
     const blurHash = encode(image, width, height, componentX, componentY);

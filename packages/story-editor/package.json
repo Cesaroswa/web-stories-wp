@@ -50,6 +50,7 @@
     "@googleforcreators/tracking": "*",
     "@googleforcreators/transform": "*",
     "@googleforcreators/units": "*",
+    "@googleforcreators/workers": "*",
     "blurhash": "^1.1.4",
     "classnames": "^2.3.1",
     "clone-deep": "^4.0.1",

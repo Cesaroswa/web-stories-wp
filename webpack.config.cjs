@@ -296,6 +296,36 @@ const editorAndDashboard = {
   },
 };
 
+const blurhashWorker = {
+  ...sharedConfig,
+  resolve: {
+    mainFields: ['browser', 'module', 'main'],
+  },
+  entry: {
+    'worker-scripts': './packages/workers/src/index.js',
+  },
+  target: 'webworker',
+  module: {
+    rules: [
+      ...sharedConfig.module.rules,
+      // {
+      //   test: /\.worker\.js/,
+      //   type: 'asset/inline',
+      // },
+    ].filter(Boolean),
+  },
+  plugins: [
+    ...sharedConfig.plugins,
+    new WebpackBar({
+      name: 'WP Webworker Scripts',
+      color: '#FF5531',
+    }),
+  ].filter(Boolean),
+  stats: {
+    errorDetails: true,
+  },
+};
+
 const webStoriesScripts = {
   ...sharedConfig,
   entry: {
@@ -406,6 +436,7 @@ const storiesImgareaselect = {
 
 module.exports = [
   editorAndDashboard,
+  blurhashWorker,
   activationNotice,
   webStoriesBlock,
   webStoriesScripts,
