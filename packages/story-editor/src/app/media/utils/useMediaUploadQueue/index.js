@@ -833,16 +833,15 @@ function useMediaUploadQueue() {
     };
 
     /**
-     * Is a new resource trimming.
+     * Is a element trimming.
      *
-     * @param {number} resourceId Resource ID.
-     * @return {boolean} if resource with id is found.
+     * @param {string} elementId Element ID.
+     * @return {boolean} if element with id is found.
      */
-    const isResourceTrimming = (resourceId) =>
+    const isElementTrimming = (elementId) =>
       state.queue.some((item) => {
         return (
-          item.state === ITEM_STATUS.TRIMMING &&
-          item.originalResourceId === resourceId
+          item.state === ITEM_STATUS.TRIMMING && item.elementId === elementId
         );
       });
 
@@ -865,7 +864,7 @@ function useMediaUploadQueue() {
         isNewResourceMuting,
         isNewResourceProcessing,
         isNewResourceTranscoding,
-        isResourceTrimming,
+        isElementTrimming,
         canTranscodeResource,
       },
       actions: {

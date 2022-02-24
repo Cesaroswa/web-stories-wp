@@ -75,23 +75,23 @@ function VideoOptionsPanel({ selectedElements, pushUpdate }) {
   const { isTranscodingEnabled } = useFFmpeg();
   const {
     muteExistingVideo,
-    isResourceTrimming,
+    isElementTrimming,
     isNewResourceMuting,
     canTranscodeResource,
   } = useLocalMedia(
     ({
-      state: { canTranscodeResource, isNewResourceMuting, isResourceTrimming },
+      state: { canTranscodeResource, isNewResourceMuting, isElementTrimming },
       actions: { muteExistingVideo },
     }) => ({
       canTranscodeResource,
       isNewResourceMuting,
-      isResourceTrimming,
+      isElementTrimming,
       muteExistingVideo,
     })
   );
   const resource = getCommonValue(selectedElements, 'resource');
-  const { isMuted, id: resourceId = 0 } = resource;
-  const isTrimming = isResourceTrimming(resourceId);
+  const { isMuted, id: resourceId = 0, elementId = 0 } = resource;
+  const isTrimming = isElementTrimming(elementId);
   const isMuting = isNewResourceMuting(resourceId);
   const loop = getCommonValue(selectedElements, 'loop');
   const isSingleElement = selectedElements.length === 1;
