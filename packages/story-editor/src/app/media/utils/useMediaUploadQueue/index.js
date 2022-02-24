@@ -235,9 +235,9 @@ function useMediaUploadQueue() {
 
   const trimVideoItem = useCallback(
     async (item) => {
-      const { id, file, additionalData = {}, trimData } = item;
+      const { id, elementId, file, additionalData = {}, trimData } = item;
 
-      startTrimming({ id });
+      startTrimming({ elementId });
 
       try {
         const newFile = await trimVideo(file, trimData.start, trimData.end);

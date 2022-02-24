@@ -43,7 +43,7 @@ import { ITEM_STATUS } from './constants';
  * @param {import('@googleforcreators/media').TrimData} action.payload.trimData Trim data.
  * @param {number} action.payload.originalResourceId Original resource id.
  * @param {string} args.elementId ID of element on the canvas.
- * @param action.payload.elementId
+ * @param {string} action.payload.elementId
  * @return {Object} New state
  */
 export function addItem(
@@ -316,14 +316,14 @@ export function finishMuting(
  * @param {Object} state Current state.
  * @param {Object} action Action object.
  * @param {Object} action.payload Action payload.
- * @param {string} action.payload.id Item ID.
+ * @param {string} action.payload.elementId Element ID.
  * @return {Object} New state
  */
-export function startTrimming(state, { payload: { id } }) {
+export function startTrimming(state, { payload: { elementId } }) {
   return {
     ...state,
     queue: state.queue.map((item) =>
-      item.id === id
+      item.elementId === elementId
         ? {
             ...item,
             state: ITEM_STATUS.TRIMMING,
