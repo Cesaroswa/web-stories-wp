@@ -289,6 +289,7 @@ function useProcessMedia({
               ? 'video-optimization'
               : 'editor',
           },
+          elementId,
           trimData,
           resource: {
             ...oldResourceWithoutId,

@@ -80,6 +80,7 @@ function useMediaUploadQueue() {
   } = useFFmpeg();
 
   const [state, actions] = useReduction(initialState, reducer);
+
   const { uploadVideoPoster } = useUploadVideoFrame({
     updateMediaElement: noop,
   });
@@ -838,11 +839,12 @@ function useMediaUploadQueue() {
      * @return {boolean} if resource with id is found.
      */
     const isResourceTrimming = (resourceId) =>
-      state.queue.some(
-        (item) =>
+      state.queue.some((item) => {
+        return (
           item.state === ITEM_STATUS.TRIMMING &&
           item.originalResourceId === resourceId
-      );
+        );
+      });
 
     return {
       state: {
