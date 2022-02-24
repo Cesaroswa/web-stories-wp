@@ -91,9 +91,8 @@ function VideoOptionsPanel({ selectedElements, pushUpdate }) {
   );
   const resource = getCommonValue(selectedElements, 'resource');
   const { isMuted, id: resourceId = 0 } = resource;
-
-  // @todo figure out how to get the elementId onto the resource (vs the trim data for the resource)
-  const isTrimming = isElementTrimming(resource?.trimData?.elementId);
+  const elementId = getCommonValue(selectedElements, 'id');
+  const isTrimming = isElementTrimming(elementId);
   const isMuting = isNewResourceMuting(resourceId);
   const loop = getCommonValue(selectedElements, 'loop');
   const isSingleElement = selectedElements.length === 1;
