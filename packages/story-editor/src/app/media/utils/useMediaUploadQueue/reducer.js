@@ -42,8 +42,6 @@ import { ITEM_STATUS } from './constants';
  * @param {boolean} action.payload.muteVideo Whether the video being uploaded should be muted.
  * @param {import('@googleforcreators/media').TrimData} action.payload.trimData Trim data.
  * @param {number} action.payload.originalResourceId Original resource id.
- * @param {string} args.elementId ID of element on the canvas.
- * @param {string} action.payload.elementId
  * @return {Object} New state
  */
 export function addItem(
@@ -61,7 +59,6 @@ export function addItem(
       muteVideo,
       trimData,
       originalResourceId,
-      elementId,
     },
   }
 ) {
@@ -85,7 +82,6 @@ export function addItem(
     muteVideo,
     trimData,
     originalResourceId,
-    elementId,
   };
 
   return {
@@ -159,7 +155,6 @@ export function finishUploading(state, { payload: { id, resource } }) {
             previousResourceId: item.resource.id,
             posterFile: null,
             originalResourceId: null,
-            elementId: null,
             state: ITEM_STATUS.UPLOADED,
           }
         : item
@@ -316,14 +311,14 @@ export function finishMuting(
  * @param {Object} state Current state.
  * @param {Object} action Action object.
  * @param {Object} action.payload Action payload.
- * @param {string} action.payload.elementId Element ID.
+ * @param {string} action.payload.id Item ID.
  * @return {Object} New state
  */
-export function startTrimming(state, { payload: { elementId } }) {
+export function startTrimming(state, { payload: { id } }) {
   return {
     ...state,
     queue: state.queue.map((item) =>
-      item.elementId === elementId
+      item.id === id
         ? {
             ...item,
             state: ITEM_STATUS.TRIMMING,
